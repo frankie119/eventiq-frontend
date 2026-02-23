@@ -1,0 +1,48 @@
+<div class="container mt-4">
+  <div class="row mb-4">
+    <div class="col text-center">
+      <h2 class="display-5 fw-bold">All Upcoming Events</h2>
+      <p class="text-muted">Discover the best events happening in Belfast</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 mb-4" *ngFor="let event of event_list">
+      <div class="card h-100 shadow-sm border-0">
+        <div class="card-header bg-primary text-white text-center py-3">
+          <i class="bi bi-calendar-event fs-2"></i>
+          <h5 class="card-title mb-0 mt-2">{{ event.title }}</h5>
+        </div>
+        
+        <div class="card-body">
+          <p class="card-text">
+            <strong><i class="bi bi-geo-alt-fill"></i> Venue:</strong> {{ event.venue }}<br>
+            <strong><i class="bi bi-clock-fill"></i> Date:</strong> {{ event.date }}<br>
+            <strong><i class="bi bi-tags-fill"></i> Category:</strong> {{ event.category }}
+          </p>
+          <p class="card-text text-truncate">
+            {{ event.description }}
+          </p>
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="badge bg-success fs-6">£{{ event.price }}</span>
+            <small class="text-muted">{{ event.tickets_left }} tickets left</small>
+          </div>
+        </div>
+
+        <div class="card-footer bg-transparent border-0 pb-4">
+          <a [routerLink]="['/events', event._id]" class="btn btn-outline-primary w-100 fw-bold">
+            View Full Details
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="event_list?.length === 0">
+    <div class="col text-center mt-5">
+      <div class="alert alert-warning">
+        No events found. Please check back later!
+      </div>
+    </div>
+  </div>
+</div>
