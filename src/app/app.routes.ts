@@ -4,7 +4,8 @@ import { Events } from './components/events/events';
 import { AddEvent } from './components/add-event/add-event';
 import { Login } from './components/login/login';
 import { EventDetails } from './event-details/event-details';
-
+import { RegisterComponent } from './components/register/register';
+import { authGuard } from './components/guards/auth-guard';
 
 export const routes: Routes = [
     {
@@ -21,11 +22,17 @@ export const routes: Routes = [
     },
     {
         path: 'add-event',
-        component: AddEvent
+        component: AddEvent,
+        canActivate: [authGuard]
     },
     {
         path: 'events/:id',
         component: EventDetails
+    },
+    {
+        path: 'register',
+        component: RegisterComponent
     }
+   
 
 ];

@@ -21,4 +21,8 @@ export class WebService {
   getOneEvent(id: string) {
     return this.http.get(`${this.BASE_URL}/events/${id}`);
   }
+
+  bookTicket(id: string) {
+    return this.http.post(`${this.BASE_URL}/events/${id}/book`, {});
+  }
 }

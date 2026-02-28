@@ -88,4 +88,13 @@ export class AuthService {
       return false;
     }
   }
+
+  is_Logged_In() {
+    if (localStorage.getItem('token')) {
+      return true;
+    } else {
+      return false;
+    }
+    
+  }
 }

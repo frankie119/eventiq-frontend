@@ -7,7 +7,9 @@
       </button>
 
       <div class="card shadow-lg border-0">
-        <div class="card-header bg-dark text-white p-4">
+        <img [src]="event_data.image" class="card-img-top bg-dark" style="height: 400px; object-fit: cover;" alt="Event Banner">
+        
+        <div class="card-header bg-dark text-white p-4 border-0 rounded-0">
           <div class="d-flex justify-content-between align-items-center">
             <h1 class="display-5 mb-0">{{ event_data.title }}</h1>
             <span class="badge bg-primary fs-5">{{ event_data.category }}</span>
@@ -16,6 +18,7 @@
 
         <div class="card-body p-5">
           <div class="row">
+            
             <div class="col-md-7">
               <h4 class="text-primary mb-3">About this Event</h4>
               <p class="lead text-muted" style="white-space: pre-line;">
@@ -31,9 +34,21 @@
                 <hr>
                 <h3 class="text-success">£{{ event_data.price }}</h3>
                 <p class="text-muted small">Tickets Left: {{ event_data.tickets_left }}</p>
-                <button class="btn btn-primary w-100 mt-2">Book Tickets Now</button>
+                
+                <button class="btn btn-primary w-100 mt-2 fw-bold" 
+                        (click)="bookTicket()"
+                        [disabled]="event_data.tickets_left === 0">
+                  Book Tickets Now
+                </button>
+
+                <div class="mt-3 text-center alert p-2" 
+                     *ngIf="bookingMessage"
+                     [ngClass]="{'alert-success': !isError, 'alert-danger': isError}">
+                  <strong>{{ bookingMessage }}</strong>
+                </div>
               </div>
             </div>
+            
           </div>
         </div>
       </div>
@@ -47,6 +62,6 @@
     <div class="spinner-border text-primary" role="status">
       <span class="visually-hidden">Loading event details...</span>
     </div>
-    <p class="mt-2">Fetching event details from EventIQ...</p>
+    <p class="mt-2 text-muted fw-bold">Fetching event details from Eventiq...</p>
   </div>
 </ng-template>

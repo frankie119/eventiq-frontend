@@ -1,7 +1,7 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
     
-    <a class="navbar-brand" routerLink="/">
+    <a class="navbar-brand fw-bold" routerLink="/">
       Eventiq
     </a>
 
@@ -24,12 +24,11 @@
         </li>
       </ul>
 
-      <ul class="navbar-nav ms-auto">
+      <ul class="navbar-nav ms-auto align-items-center">
         
         <ng-container *ngIf="authService.isAuthenticated$ | async; else loggedOut">
           <li class="nav-item">
-            <button class="btn btn-light" 
-                    (click)="authService.logout({ logoutParams: { returnTo: document.location.origin } })">
+            <button class="btn btn-outline-light btn-sm" (click)="authService.logout()">
               Log out
             </button>
           </li>
@@ -37,9 +36,12 @@
 
         <ng-template #loggedOut>
           <li class="nav-item">
-            <button class="btn btn-light" (click)="authService.loginWithRedirect()">
+            <a class="nav-link me-2" routerLink="/register" routerLinkActive="active">Register</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-light btn-sm fw-bold px-3" routerLink="/login">
               Log in
-            </button>
+            </a>
           </li>
         </ng-template>
 
