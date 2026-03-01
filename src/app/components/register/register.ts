@@ -8,10 +8,11 @@ import { CommonModule } from '@angular/common';
   selector: 'app-register',
   standalone: true,
   imports: [ReactiveFormsModule, CommonModule, RouterModule],
-  templateUrl: './register.html',
-  styleUrl: './register.css'
+  templateUrl: 'register.html',
+  styleUrl: 'register.css'
 })
 export class RegisterComponent {
+  categories = ['chill', 'music', 'sport', 'arts', 'education', 'food'];
   registerForm: FormGroup;
   errorMessage: string = '';
   successMessage: string = '';
@@ -26,8 +27,21 @@ export class RegisterComponent {
       password: ['', [Validators.required, Validators.minLength(6)]],
       full_name: ['', Validators.required],
       location: ['Belfast'],
-      interests: [[]]
+      interests: [[]] // This will hold the array of selected categories
     });
+  }
+
+  onInterestChange(category: string, event: any) {
+    const interests = this.registerForm.get('interests')?.value as string[];
+    
+    if (event.target.checked) {
+      interests.push(category);
+    } else {
+      const index = interests.indexOf(category);
+      if (index > -1) interests.splice(index, 1);
+    }
+
+    this.registerForm.patchValue({ interests: interests });
   }
 
   onSubmit() {

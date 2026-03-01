@@ -19,34 +19,34 @@
           <a class="nav-link" routerLink="/events" routerLinkActive="active">Events</a>
         </li>
 
-        <li class="nav-item" *ngIf="authService.isAuthenticated$ | async">
+        <li class="nav-item" *ngIf="authService.is_Logged_In()">
           <a class="nav-link" routerLink="/add-event" routerLinkActive="active">Add Event</a>
         </li>
       </ul>
 
       <ul class="navbar-nav ms-auto align-items-center">
-        
-        <ng-container *ngIf="authService.isAuthenticated$ | async; else loggedOut">
-          <li class="nav-item">
+      
+          <li *ngIf = "authService.is_Logged_In()" class="nav-item">
             <button class="btn btn-outline-light btn-sm" (click)="authService.logout()">
               Log out
             </button>
           </li>
-        </ng-container>
-
-        <ng-template #loggedOut>
-          <li class="nav-item">
-            <a class="nav-link me-2" routerLink="/register" routerLinkActive="active">Register</a>
+          <li *ngIf = "!authService.is_Logged_In()" 
+            class="nav-item">
+            <a class="nav-link me-2" 
+            routerLink="/register" 
+            routerLinkActive="active">
+              Register
+            </a>
           </li>
-          <li class="nav-item">
-            <a class="btn btn-light btn-sm fw-bold px-3" routerLink="/login">
+          <li *ngIf = "!authService.is_Logged_In()"
+            class="nav-item">
+            <a class="btn btn-light btn-sm fw-bold px-3" 
+            routerLink="/login">
               Log in
             </a>
           </li>
-        </ng-template>
-
-      </ul>
-      
+      </ul>  
     </div>
   </div>
 </nav>

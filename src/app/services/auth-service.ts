@@ -97,4 +97,17 @@ export class AuthService {
     }
     
   }
+
+  getUserInterests(): string[] {
+    const token = this.getToken();
+    if (!token) return [];
+
+    try{
+      const decoded: any = jwtDecode(token);
+      return decoded.interests || [];
+    } catch (error) {
+      return [];
+    }
+    
+  }
 }

@@ -19,9 +19,7 @@ export class Home implements OnInit {
   constructor(private webService: WebService) {}
 
   ngOnInit() {
-    // Fetch top 5 trending events from Flask
-    // Ensure your WebService has a getTrendingEvents() method!
-    // If not, use: this.http.get('http://127.0.0.1:5000/api/v1.0/events/trending')
+  
     this.webService.getTrendingEvents().subscribe((data: any) => {
       this.trending_events = data;
     });
